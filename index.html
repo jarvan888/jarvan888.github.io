@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1T9153Q1D8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1T9153Q1D8');
+</script>
+    <meta charset="UTF-8">
+    <meta name=renderer content=webkit>
+    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<style type="text/css">
+input::-ms-input-placeholder{text-align: center;}
+input::-webkit-input-placeholder{text-align: center;}
+
+input.form-control{text-align:center}
+
+</style>
+
+
+    <title>CoinHero币安一键发币</title>
+
+    <!--CDN for Bootstrap 4-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!--CDN for Animation-->
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <!--Main Stylesheet-->
+    <link rel="stylesheet" href="styles/main.css">
+    <!--Link for Material Icon-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/images/logo.png">
+</head>
+<body>
+<div class="container-first">
+    <div class="row wrap-form animated fadeInDown">
+        <div class="col-12 align-self-end hide" id="metamask-locked">
+            <i class="material-icons metamask-span">lock</i>
+            <span class="metamask-text">Metamask Locked</span>
+        </div>
+        <img src="assets/images/logo.png" alt="logo">
+       
+        <div class="col-12 align-self-end hide" id="metamask-unlocked">
+            <i class="material-icons metamask-span">lock_open</i>
+            <span class="metamask-text">Metamask Unlocked</span>
+        </div>
+        <!--Asset Generator Form-->
+        <div class="col-12 align-self-center">
+
+            <p class="heading" align="center">BEP-20 高级代币参数</p>
+            <!--Content to be Displayed when metamask is not available-->
+            <p class="content" align="center">币安智能链一键发币</p>
+            <p class="content" id="metamask-status"></p>
+            <!--When you are connected to mainnet-->
+            <p class="content hide" id="current-address" align="center"></p>
+            <p class="content hide" id="current-network" align="center"></p>
+        </div>
+        <div class="col-12 align-self-center">
+            <form id="asset-form">
+                <div class="form-group">
+                    <input class="text" type="text" id="name" placeholder="代币名称 Name"  required><a href="#asset-name">
+                        <i id="info-name" class="material-icons info">info</i>
+                    </a>
+                </div>
+                <div class="form-group">
+                    <input type="text-align: center" class="form-control" id="symbol" placeholder="代币符号 Symbol" required><a href="#asset-symbol"><i id="info-symbol" class="material-icons info">info</i></a>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" maxlength="2" id="decimals" placeholder="小数位数 Decimals" required>
+                    <a href="#asset-decimal"><i id="info-decimal" class="material-icons info">info</i></a>
+                    <span class="error-msg" id="decimals-error-msg"></span>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="total-supply" placeholder="总发行量 TotalSupply " required>
+                    <a href="#asset-supply"><i id="info-supply" class="material-icons info">info</i></a>
+                    <span class="error-msg" id="total-supply-error-msg"></span>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="txFee" placeholder="持币分红比例 Instant Usage Rewards" required>
+                    <a href="#asset-txFee"><i id="info-txFee" class="material-icons info">info</i></a>
+                    <span class="error-msg" id="total-supply-error-msg"></span>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="burnFee" placeholder="自动燃烧比例 Auto Burn " required>
+                    <a href="#asset-burnFee"><i id="info-burnFee" class="material-icons info">info</i></a>
+                    <span class="error-msg" id="total-supply-error-msg"></span>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="charityFee" placeholder="手续费/添加流动池比例 Automatic LP" required>
+                    <a href="#asset-charityFee"><i id="info-charityFee" class="material-icons info">info</i></a>
+                    <span class="error-msg" id="total-supply-error-msg"></span>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="FeeAddress" placeholder="手续费接收地址 LP or wallet address" required>
+                    <a href="#asset-FeeAddress"><i id="info-FeeAddress" class="material-icons info">info</i></a>
+                    <span class="error-msg" id="total-supply-error-msg"></span>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="tokenOwner" placeholder="代币所有者 TokenOwner" required>
+                    <a href="#asset-tokenOwner"><i id="info-tokenOwner" class="material-icons info">info</i></a>
+                    <span class="error-msg" id="total-supply-error-msg"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <button align="center" class="submit-button btn btn-primary" id="submit-btn" type="submit">
+                        👌发行代币
+                    </button>
+                </div>
+
+
+            </form>
+
+
+
+            <!--Asset Generator Form Ends here-->
+
+
+            <p id="statusText"></p>
+        </div>
+    </div>
+</div>
+<!--Section for Info Messages for Input-->
+<div class="container-second">
+    <div class="row info-content">
+        <ul class="list-group list-group-flush" id="list-group">
+            <li class="list-group-item animated fadeInUp" id="asset-name">
+                • <span class="info-heading">代币名称 : </span>
+                <p class="info-main">代币的名称，3 ~ 25个英文字符，例如Bitcoin，Ethereum等.</p>
+            </li>
+            <li class="list-group-item animated fadeInUp" id="asset-symbol">
+                • <span class="info-heading">代币符号 : </span>
+                <p class="info-main">
+                    英文字符，例如ETH, BTC, BAT 等，不可包含空格).
+                </p>
+            </li>
+            <li class="list-group-item animated fadeInUp" id="asset-decimal">
+                • <span class="info-heading">小数位数 :  </span>
+                <p class="info-main">
+                    代币的小数位数，0 ~ 18位，大多数代币选择18位小数.).
+                </p>
+            </li>
+            <li class="list-group-item animated fadeInUp" id="asset-supply">
+                • <span class="info-heading">总发行量     : </span>
+                <p class="info-main">
+                    要发行的代币总量，最小1，最大1000000000000000.)
+                </p>
+            </li>
+
+
+            <li class="list-group-item animated fadeInUp" id="asset-txFee">
+                • <span class="info-heading">持币分红 :<br /></span>
+                <p class="info-main">
+                    自动持币分红是指每笔交易都会产生税款，然后自动发放到币种持有人的地址 <strong>持币分红</strong>
+                    可以自行根据需要设置比例. (eg. 输入数字3即代表当前设置的持币分红比例为3%.)
+                </p>
+            </li>
+
+            <li class="list-group-item animated fadeInUp" id="asset-burnFee">
+                • <span class="info-heading">自动燃烧 :<br /> </span>
+                <p class="info-main">
+                    <br />自动燃烧是指每笔交易都会销毁一定比例的币量，借此提高币的价值 <strong>自动燃烧</strong>
+                    可以自行根据需要设置比例. (eg. 输入数字3即代表当前设置的自动燃烧比例为3%.)
+                </p>
+            </li>
+
+            <li class="list-group-item animated fadeInUp" id="asset-burnFee">
+                • <span class="info-heading">手续费 : </span>
+                <p class="info-main">
+                    手续费是指每笔交易都会产生一定比例的手续费，然后自动发放到接收地址 <strong>手续费/自动添加流动池</strong>
+                    可以自行根据需要设置比例. (eg. 输入数字3即代表当前设置的手续费比例为3%，如需设置成自动添加流动池，请联络我们.)
+                </p>
+            </li>
+
+
+
+            <li class="list-group-item animated fadeInUp" id="asset-burnFee">
+                • <span class="info-heading">手续费接收地址    : </span>
+                <p class="info-main">
+                    直接输入接收钱包地址即可 <strong>手续费接收地址</strong>
+                    即使不需要手续费功能，亦需要输入手续费接收地址.)
+                </p>
+            </li>
+
+            <li class="list-group-item animated fadeInUp" id="asset-burnFee">
+                • <span class="info-heading">代币所有者    : </span>
+                <p class="info-main">
+                    代表此地址拥有币的所有权，所发行的代币总量会直接发送到此地址，直接输入你的钱包地址即可.)
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--Section for Info Message ends-->
+<div class="container-third">
+    <div class="row copyright-row">
+        <p class="copyright">© CoinHero 2021. All Rights Reserved.</p>
+        
+    </div>
+</div>
+
+<!--Libs-->
+<!--CDN for jquery and popper.js and bootstrap-->
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/web3.min.js"></script>
+
+<!--Core-->
+<script src="scripts/app.js"></script>
+<a href="assets/123/index.html/">创建火币HECO智能链代币</a>
+
+–>
+</body>
+</html>
